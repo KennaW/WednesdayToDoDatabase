@@ -24,6 +24,14 @@
         return $app['twig']->render('index.twig', array('categories' => Category::getAll()));
     });
 
+    //get search result
+    // $app->post("/search", function() use ($app){
+    //     $search_term = $_POST['search'];
+    //     $results = Task::search($search_term);
+    //     return $app['twig']->render('search.twig', array('result' => $results));
+    //
+    // });
+
     //get method for tasks page, and call getAll function on Task class and save it into an array
     $app->get("/tasks", function() use ($app) {
         return $app['twig']->render('tasks.twig', array('tasks' => Task::getAll()));

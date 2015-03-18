@@ -96,5 +96,34 @@
             }
             return $found_task;//return found task
         }
+
+    // static function can scan everything. In this case, in order to do a search
+    // 'search' uses the value $search_term from the twig form
+    // we create a new array because sql and php won't talk to each other without the array
+    // then we query the globals database for all of the tasks where description matches a wild card version of $search_term. The result of the query is assigned to $search result
+    // then we start to fill our array (with array_push)
+    // for each instance of search_result, we create a new this_result, which needs the description, category id, and id from the class Task.
+    // we then 'push' each instance of $this_result into the empty array $search_array
+    // then we have to return the array.
+
+        // static function search($search_term)
+        // {
+        //     $search_array = array();
+        //     $search_result = $GLOBALS['DB']->query("SELECT * FROM tasks WHERE description LIKE '%{$search_term}%'");
+        //     foreach($search_result as $this_result) {
+        //         $this_result = new Task($description, $category_id, $id);
+        //         array_push($search_array, $this_result);
+        //     }
+        //     return $search_array;
+        //
+        // }
+
+
+
+
+
+
+
+
     }
 ?>
