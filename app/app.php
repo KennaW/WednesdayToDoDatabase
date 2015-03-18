@@ -15,7 +15,11 @@
         'twig.path' => __DIR__.'/../views'
     ));
 
+     use Symfony\Component\HttpFoundation\Request;
+     Request::enableHttpMethodParameterOverride();
+
     //get method for the index page
+    //This part is wrong in the using path and delete in php tuesday homework
     $app->get("/", function() use ($app) {
         return $app['twig']->render('index.twig', array('categories' => Category::getAll()));
     });
@@ -44,6 +48,7 @@
         return $app['twig']->render('index.twig', array('categories' => Category::getAll()));
     });
 
+    //not sure if need
     //post method for tasks page for 'description' from our form, getAll function for Task class
     $app->post("/tasks", function() use ($app) {
         $description = $_POST['description'];
@@ -66,6 +71,23 @@
         Category::deleteAll();
         return $app['twig']->render('index.twig');
     });
+
+    //error in text homework
+    $app->get("/categories/{id}/edit", function($id) use ($app) {
+        $category = Category::find($id);
+        return $app['twig']->render('category_edit.html.twig', array('category' => $category));
+    });
+
+    $app->patch("/categories/{id}", function($id) use ($app) {
+        $name = $_POST['name'];
+        $category = Category::find($id);
+        $category ->update($name);
+        return $app['twig']->render('category.twig', array('category' => $category, 'task' => $category->getTasks()));
+
+    });
+
+
+    
 
     return $app;
 

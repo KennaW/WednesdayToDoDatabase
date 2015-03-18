@@ -1,0 +1,80 @@
+Last login: Wed Mar 18 09:49:13 on ttys003
+epicodus-106:~ Guest$ psql
+psql (9.4.1)
+Type "help" for help.
+
+Guest=# CREATE DATABASE to_do;
+CREATE DATABASE
+Guest=# \c
+You are now connected to database "Guest" as user "Guest".
+Guest=# \c to_do;
+You are now connected to database "to_do" as user "Guest".
+to_do=# CREATE TABLE tasks;
+ERROR:  syntax error at or near ";"
+LINE 1: CREATE TABLE tasks;
+                          ^
+to_do=# CREATE TABLE tasks (id serial PRIMARY KEY, description varchar);
+CREATE TABLE
+to_do=# ALTER TABLE tasks ADD category_id int;
+ALTER TABLE
+to_do=# CREATE DATABASE to_do_test WITH TEMPLATE to_do;
+CREATE DATABASE
+to_do=# \ls
+Invalid command \ls. Try \? for help.
+to_do=# \l
+                             List of databases
+    Name    |  Owner   | Encoding | Collate | Ctype |   Access privileges
+------------+----------+----------+---------+-------+-----------------------
+ Guest      | epicodus | UTF8     | C       | C     |
+ postgres   | epicodus | UTF8     | C       | C     |
+ template0  | epicodus | UTF8     | C       | C     | =c/epicodus          +
+            |          |          |         |       | epicodus=CTc/epicodus
+ template1  | epicodus | UTF8     | C       | C     | =c/epicodus          +
+            |          |          |         |       | epicodus=CTc/epicodus
+ to_do      | Guest    | UTF8     | C       | C     |
+ to_do_test | Guest    | UTF8     | C       | C     |
+(6 rows)
+
+to_do=# DROP DATABASE to_do_test;
+DROP DATABASE
+to_do=# SELECT * FROM to_do
+to_do-# SELECT * FROM to_do;
+ERROR:  syntax error at or near "SELECT"
+LINE 2: SELECT * FROM to_do;
+        ^
+to_do=# \l
+                             List of databases
+   Name    |  Owner   | Encoding | Collate | Ctype |   Access privileges
+-----------+----------+----------+---------+-------+-----------------------
+ Guest     | epicodus | UTF8     | C       | C     |
+ postgres  | epicodus | UTF8     | C       | C     |
+ template0 | epicodus | UTF8     | C       | C     | =c/epicodus          +
+           |          |          |         |       | epicodus=CTc/epicodus
+ template1 | epicodus | UTF8     | C       | C     | =c/epicodus          +
+           |          |          |         |       | epicodus=CTc/epicodus
+ to_do     | Guest    | UTF8     | C       | C     |
+(5 rows)
+
+to_do=# CREATE TABLE categories;
+ERROR:  syntax error at or near ";"
+LINE 1: CREATE TABLE categories;
+                               ^
+to_do=# CREATE TABLE categories(id serial PRIMARY KEY, name varchar);
+CREATE TABLE
+to_do=# CREATE DATABASE to_do_test WITH TEMPLATE to_do;
+CREATE DATABASE
+to_do=# \l
+                             List of databases
+    Name    |  Owner   | Encoding | Collate | Ctype |   Access privileges
+------------+----------+----------+---------+-------+-----------------------
+ Guest      | epicodus | UTF8     | C       | C     |
+ postgres   | epicodus | UTF8     | C       | C     |
+ template0  | epicodus | UTF8     | C       | C     | =c/epicodus          +
+            |          |          |         |       | epicodus=CTc/epicodus
+ template1  | epicodus | UTF8     | C       | C     | =c/epicodus          +
+            |          |          |         |       | epicodus=CTc/epicodus
+ to_do      | Guest    | UTF8     | C       | C     |
+ to_do_test | Guest    | UTF8     | C       | C     |
+(6 rows)
+
+to_do=# \q

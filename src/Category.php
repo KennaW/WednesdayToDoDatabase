@@ -32,8 +32,8 @@
         function getTasks()
         {
             $tasks = Array();
-            $returned_tasks = $GLOBALS['DB']->query("SELECT * FROM tasks WHERE
-                category_id = {$this->getId()};");
+            $returned_tasks = $GLOBALS['DB']->query("SELECT * FROM tasks WHERE                category_id = {$this->getId()};");
+
             foreach($returned_tasks as $task) {
                 $description = $task['description'];
                 $id = $task['id'];
@@ -87,6 +87,17 @@
                 }
             }
             return $found_category;
+        }
+
+        function update($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE categories SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
+        }
+
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM categories WHERE id = {$this->getId()};");
         }
     }
  ?>
