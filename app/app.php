@@ -87,7 +87,12 @@
     });
 
 
-    
+    $app->delete("/categories/{id}", function($id) use ($app){
+        $category = Category::find($id);
+        $category->delete();
+        return $app['twig']->render('index.twig', array('categories' => Category::getAll()));
+
+    });
 
     return $app;
 
