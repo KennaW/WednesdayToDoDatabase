@@ -177,6 +177,29 @@
            //Assert
            $this->assertEquals($test_Task, $result);
        }
+       
+               function task_name()
+        {
+            //Arrange
+            $name = "Tommy";
+            $id = 5;
+            $test_category = new Category($name, $id);
+            $test_category->save();
+            $category_id = $test_category->getId();
+
+
+            $name = "Wash Car";
+            $id = 3;
+            $test_Task = new Task($name, $id, $category_id);
+            $test_Task->save();
+
+            $result = Task::searchByName("Wash Car");
+
+            //assert
+            $this->assertEquals($test_Task, $result);
+
+
+        }
 
     }
 ?>
